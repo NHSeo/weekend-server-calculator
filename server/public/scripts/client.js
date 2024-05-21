@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', function() {
         axios.post('/calculations', { numOne, numTwo, operator: selectedOperator })
             .then(response => {
                 renderRecentResult(response.data.result);
-                return axios.get('/calculations'); // POST 성공 후 GET 요청
+                return axios.get('/calculations');
             })
             .then(response => {
                 rendCalc(response.data);
