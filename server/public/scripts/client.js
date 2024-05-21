@@ -65,13 +65,16 @@ document.addEventListener('DOMContentLoaded', function() {
         const numTwo = numTwoValue - 0;
   
         axios.post('/calculations', { numOne, numTwo, operator: selectedOperator })
-          .then(response => {
-            renderRecentResult(response.data.result);
-            getCalc();
-          })
-          .catch(error => {
+            .then(response => {
+                renderRecentResult(response.data.result);
+                return axios.get('/calculations'); // POST 성공 후 GET 요청
+            })
+            .then(response => {
+                rendCalc(response.data);
+            })
+            .catch(error => {
             console.error('Error POST calc:', error);
-          });
+            });
   
         return;
       }
