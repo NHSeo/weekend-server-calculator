@@ -4,7 +4,19 @@ document.addEventListener('DOMContentLoaded', function() {
     const calculatorForm = document.querySelector('[data-testid="calculator"]');
     const resultHistorySection = document.querySelector('[data-testid="resultHistory"]');
     const recentResultSection = document.querySelector('[data-testid="recentResult"]');
+    const clearHistoryButton = document.querySelector('#clearHistoryButton');
     let selectedOperator = null;
+
+    clearHistoryButton.addEventListener('click', function() {
+        axios.delete('/calculations')
+            .then(response => {
+                resultHistorySection.innerHTML = '';
+                recentResultSection.innerHTML = '';
+            })
+            .catch(error => {
+                console.error('Error clearing history:', error);
+            });
+    });
   
     function rendCalc(calculations) {
       resultHistorySection.innerHTML = '';
