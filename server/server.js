@@ -49,6 +49,11 @@ app.post('/calculations', (req, res) => {
   res.status(201).json(calculation);
 });
 
+// Delete for stretch goal
+app.delete('/calculations', (req, res) => {
+  calculations = [];
+  res.status(200).send('Removed all.');
+});
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
 // 🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸  🐻  🐻‍❄️  🧸
