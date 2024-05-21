@@ -18,6 +18,36 @@ app.get('/calculations', function (request, response) {
 })
 
 // POST /calculations
+app.post('/calculations', (req, res) => {
+  const { numOne, numTwo, operator } = req.body;
+  let result;
+
+  if (typeof numOne !== 'number' || typeof numTwo !== 'number') {
+    return res.status(400).send('Invalid input.');
+  }
+
+  switch (operator) {
+    case '+':
+      result = numOne + numTwo;
+      break;
+    case '-':
+      result = numOne - numTwo;
+      break;
+    case '*':
+      result = numOne * numTwo;
+      break;
+    case '/':
+      result = numTwo !== 0 ? numOne / numTwo : 'Error';
+      break;
+    default:
+      return res.status(400).send('Invalid');
+  }
+
+  const calculation = { numOne, numTwo, operator, result };
+  calculations.push(calculation);
+
+  res.status(201).json(calculation);
+});
 
 
 // PLEASE DO NOT MODIFY ANY CODE BELOW THESE BEARS:
